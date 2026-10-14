@@ -1,5 +1,5 @@
 // Guarda la app en el iPhone para que se abra sin conexión (versión 1).
-const CACHE = 'gym-v1';
+const CACHE = 'gym-v2';
 const SHELL = ['./', 'index.html', 'manifest.webmanifest', 'icon-180.png', 'icon-192.png', 'icon-512.png', 'icon-512-maskable.png'];
 
 self.addEventListener('install', e => {

@@ -227,7 +227,7 @@ th.num,td.num{text-align:right}
   </nav>
 
   <div class="notice" id="notice" hidden></div>
-  <input class="vh" type="file" id="file-import" accept=".json,application/json" tabindex="-1" aria-hidden="true">
+  <input class="vh" type="file" id="file-import" tabindex="-1" aria-hidden="true">
 
   <section class="view" id="view-entrenar" aria-labelledby="tab-entrenar">
     <div class="days" id="days"></div>
@@ -529,7 +529,7 @@ function importar(file){
   r.onerror=()=>showNotice('No se pudo leer el archivo. Vuelve a intentarlo.',true);
   r.onload=()=>{
     let o=null;try{o=JSON.parse(r.result)}catch(e){}
-    const inc=o&&o.app==='gym-cloud'&&o.docs&&typeof o.docs==='object'?o.docs:null;
+    const inc=o&&o.docs&&typeof o.docs==='object'?o.docs:(o&&typeof o==='object'&&Object.keys(o).some(k=>k.slice(0,2)==='s_')?o:null);
     if(!inc){showNotice('Ese archivo no es una copia de esta app. Elige gym-cloud.json en la carpeta gym cloud.',true);return}
     commit();
     const hadData=sessions().length>0;let n=0;
