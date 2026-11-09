@@ -1,5 +1,5 @@
 // Guarda la app en el iPhone para que se abra sin conexión (versión 1).
-const CACHE = 'gym-v2';
+const CACHE = 'gym-v3';
 const SHELL = ['./', 'index.html', 'manifest.webmanifest', 'icon-180.png', 'icon-192.png', 'icon-512.png', 'icon-512-maskable.png'];
 
 self.addEventListener('install', e => {
@@ -16,6 +16,7 @@ function withTimeout(p, ms) {
 self.addEventListener('fetch', e => {
   const req = e.request;
   if (req.method !== 'GET') return;
+  if (new URL(req.url).pathname.indexOf('/dieta/') >= 0) return;
   if (req.mode === 'navigate') {
     // Primero la red (para recibir actualizaciones); si no hay cobertura en 3 s, la copia guardada.
     e.respondWith(withTimeout(fetch(req), 3000)
